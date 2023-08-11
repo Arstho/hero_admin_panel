@@ -1,10 +1,9 @@
 const initialState = {
   heroes: [],
-  heroesLoadingStatus: 'idle',
-  filters: []
+  heroesLoadingStatus: 'idle'
 }
 
-const reducer = (state = initialState, action) => {
+const heroes = (state = initialState, action) => {
   switch (action.type) {
     case 'HEROES_FETCHING':
       return {
@@ -22,20 +21,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         heroesLoadingStatus: 'error'
       }
-    case 'HERO_POST':
+    case 'HERO_CREATED':
       return {
         ...state,
-        heroes: [...state.heroes, action.payload],
-        heroesLoadingStatus: 'idle'
+        heroes: [...state.heroes, action.payload]
       }
-    case 'HERO_DELETE':
+    case 'HERO_DELETED':
       return {
         ...state,
-        heroes: state.heroes.filter((hero) => hero.id !== action.payload),
-        heroesLoadingStatus: 'idle'
+        heroes: state.heroes.filter(item => item.id !== action.payload)
       }
     default: return state
   }
 }
 
-export default reducer;
+export default heroes;
